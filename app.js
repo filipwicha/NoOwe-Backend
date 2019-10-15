@@ -1,11 +1,15 @@
 const express = require('express')
+const app = express()
 const bodyParser = require('body-parser')
-const mysqlConnection = require('./connection')
-const UsersRoutes = require('./routes/users')
+const port = process.env.PORT || 3000
 
-var app = express()
+const mysqlConnection = require('./db/db')
+
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.use('/users', UsersRoutes)
+app.listen(port)
+console.log('Port ' + port)
 
-app.listen(3000) 
+var routes = require('./routes/userRoutes')
+routes(app)

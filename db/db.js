@@ -9,7 +9,7 @@ var mysqlConnection = mysql.createConnection({
 })
 
 mysqlConnection.connect((err) => {
-    console.log(!err ? "connected" : "Failed to connect")
+    console.log(!err ? "Connected" : "Failed to connect")
 })
 
 module.exports = mysqlConnection
