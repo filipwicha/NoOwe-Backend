@@ -6,16 +6,18 @@ var User = function (user) {
     this.password = user.password
     this.confirmed_at = user.confirmed_at
     this.reset_send_at = user.reset_send_at
+
+    console.log("Model user: " + JSON.stringify(user));
 }
 
 User.createUser = function (newUser, result) {
-    sql.query('INSERT INTO users SET ?', newUser, function (err, res) {
+    sql.query('INSERT INTO users SET ?', newUser, function (err, res, fields) {
         if (err) {
             console.log("Error: ", err)
             result(err, null)
         } else {
-            console.log("ID: " + res.insertedId)
-            result(null, res.insertedId)
+            console.log("ID: " + res.insertId)
+            result(null, res.insertId)
         }
     })
 }
@@ -44,8 +46,9 @@ User.getAllUsers = function (result) {
     })
 }
 
-User.updateById = function (id, user, result) {
-    sql.query("UPDATE users SET user = ? where id = ?", [user.user, id], function (err, res) {
+User.updateById = function (id, user, result) { //to repair
+    console.log(JSON.stringify(user))
+    console.log(sql.query("UPDATE users SET ?? where id = ?", [user, id], function (err, res) {
         if (err) {
             console.log("Error: ", err)
             result(null, err)
@@ -54,6 +57,7 @@ User.updateById = function (id, user, result) {
             result(null, res)
         }
     })
+    )
 }
 
 User.removeById = function (id, result) {

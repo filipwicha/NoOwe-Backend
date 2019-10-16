@@ -12,7 +12,7 @@ exports.list_all_users = function (req, res) {
 }
 
 exports.create_an_user = function (req, res) {
-    User.createTask(new User(req.body), function (err, user) {
+    User.createUser(new User(req.body), function (err, user) {
         if (err) {
             res.send(err)
         } else {
@@ -31,7 +31,7 @@ exports.read_an_user = function (req, res) {
     })
 }
 
-exports.update_an_task = function (req, res) {
+exports.update_an_user = function (req, res) {
     User.updateById(req.params.userId, new User(req.body), function (err, user) {
         if (err) {
             res.send(err)
@@ -42,7 +42,7 @@ exports.update_an_task = function (req, res) {
 }
 
 exports.delete_an_user = function (req, res) {
-    User.remove(req.params.userId, function (err, user) {
+    User.removeById(req.params.userId, function (err, user) {
         if (err) {
             res.send(err)
         } else {

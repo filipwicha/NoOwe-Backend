@@ -7,6 +7,6 @@ module.exports = function (app) {
 
     app.route('/user/:userId')
         .get(controller.read_an_user)
-        //.put(controller.update_an_user)
+        .put(controller.update_an_user)
         .delete(controller.delete_an_user)
 }
