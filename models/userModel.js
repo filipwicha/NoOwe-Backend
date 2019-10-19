@@ -47,8 +47,9 @@ User.getAllUsers = function (result) {
 }
 
 User.updateById = function (id, user, result) { //to repair
-    console.log(JSON.stringify(user))
-    console.log(sql.query("UPDATE users SET ?? where id = ?", [user, id], function (err, res) {
+    user = JSON.parse(JSON.stringify(user)) //remove undefined fields
+
+    console.log(sql.query("UPDATE users SET ? where id = ?", [user, id], function (err, res) {
         if (err) {
             console.log("Error: ", err)
             result(null, err)
@@ -72,4 +73,4 @@ User.removeById = function (id, result) {
     })
 }
 
-module.exports= User
+module.exports = User
