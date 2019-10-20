@@ -46,10 +46,10 @@ User.getAllUsers = function (result) {
     })
 }
 
-User.updateById = function (id, user, result) { //to repair
+User.updateById = function (id, user, result) { 
     user = JSON.parse(JSON.stringify(user)) //remove undefined fields
 
-    console.log(sql.query("UPDATE users SET ? where id = ?", [user, id], function (err, res) {
+    sql.query("UPDATE users SET ? where id = ?", [user, id], function (err, res) {
         if (err) {
             console.log("Error: ", err)
             result(null, err)
@@ -58,7 +58,6 @@ User.updateById = function (id, user, result) { //to repair
             result(null, res)
         }
     })
-    )
 }
 
 User.removeById = function (id, result) {

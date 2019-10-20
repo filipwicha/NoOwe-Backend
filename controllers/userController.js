@@ -46,7 +46,7 @@ exports.delete_an_user = function (req, res) {
         if (err) {
             res.send(err)
         } else {
-            res.json({ message: 'User ' + req.params.taskId + " deleted successfully" })
+            res.json({ message: 'User ' + req.params.id + " deleted successfully" })
         }
     })
 }

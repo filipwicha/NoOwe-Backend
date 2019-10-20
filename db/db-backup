@@ -6,17 +6,20 @@ CREATE TABLE `users` (
   `confirmed_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `reset_send_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `budgets` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
   `color` varchar(7) DEFAULT NULL,
   `owner_id` int(8) NOT NULL,
+  `currency_id` int(8) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `owner_id` (`owner_id`),
-  CONSTRAINT `budgets_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `currency_id` (`currency_id`),
+  CONSTRAINT `budgets_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `budgets_ibfk_2` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `transactions` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
@@ -41,12 +44,18 @@ CREATE TABLE `budget_members` (
   KEY `budget_id` (`budget_id`),
   CONSTRAINT `budget_members_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `budget_members_ibfk_2` FOREIGN KEY (`budget_id`) REFERENCES `budgets` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `categories` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `currencies` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `code` varchar(3) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `shares` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
@@ -58,4 +67,4 @@ CREATE TABLE `shares` (
   KEY `member_id` (`member_id`),
   CONSTRAINT `shares_ibfk_1` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`),
   CONSTRAINT `shares_ibfk_2` FOREIGN KEY (`member_id`) REFERENCES `budget_members` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
