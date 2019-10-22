@@ -1,13 +1,20 @@
 var sql = require('../db/db')
+const bcrypt = require('bcrypt')
 
 var User = function (user) {
     this.email = user.email
     this.username = user.username
-    this.password = user.password
+    this.password = typeof user.password === 'string' ? bcrypt.hashSync(user.password, 10) : undefined
     this.confirmed_at = user.confirmed_at
     this.reset_send_at = user.reset_send_at
+}
 
-    console.log("Model user: " + JSON.stringify(user));
+User.prototype.comparePassword = function (password){
+    if(bcrypt.compareSync('password', this.password)) {
+        return true
+       } else {
+        return false
+       }
 }
 
 User.createUser = function (newUser, result) {
@@ -46,7 +53,7 @@ User.getAllUsers = function (result) {
     })
 }
 
-User.updateById = function (id, user, result) { 
+User.updateById = function (id, user, result) {
     user = JSON.parse(JSON.stringify(user)) //remove undefined fields
 
     sql.query("UPDATE users SET ? where id = ?", [user, id], function (err, res) {
