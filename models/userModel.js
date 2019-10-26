@@ -1,4 +1,4 @@
-var sql = require('../db/db')
+var sql = require('../config/db')
 const bcrypt = require('bcrypt')
 
 var User = function (user) {
@@ -9,12 +9,34 @@ var User = function (user) {
     this.reset_send_at = user.reset_send_at
 }
 
-User.prototype.comparePassword = function (password){
-    if(bcrypt.compareSync('password', this.password)) {
+User.prototype.comparePassword = function (password) {
+    if (bcrypt.compareSync('password', this.password)) {
         return true
-       } else {
+    } else {
         return false
-       }
+    }
+}
+
+User.getJSONWebToken = function (userId, result) {
+    sql.query('SELECT * FROM users WHERE id = ?', userId, function (err, res) {
+        if (err) {
+            console.log("Error: ", err)
+            result(err, null)
+        } else {
+            result(null, res)
+        }
+    })
+}
+
+User.getJSONWebToken = function (userId, result) {
+    sql.query('SELECT * FROM users WHERE id = ?', userId, function (err, res) {
+        if (err) {
+            console.log("Error: ", err)
+            result(err, null)
+        } else {
+            result(null, res)
+        }
+    })
 }
 
 User.createUser = function (newUser, result) {

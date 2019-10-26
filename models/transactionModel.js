@@ -1,4 +1,4 @@
-var sql = require('../db/db')
+var sql = require('../config/db')
 
 var Transaction = function (transaction) {
     this.title = transaction.title

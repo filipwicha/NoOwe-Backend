@@ -3,10 +3,16 @@ const app = express()
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 
-const mysqlConnection = require('./db/db')
+const mysqlConnection = require('./config/db')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
+const passport = require('passport')
+const passportJWT = require('passport-jwt')
+let ExtractJwt = passportJWT.ExtractJwt
+let JwtStrategy = passportJWT.Strategy
+let jwtOptions = {}
 
 app.listen(port)
 console.log('Port ' + port)

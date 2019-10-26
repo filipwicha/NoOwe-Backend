@@ -1,4 +1,4 @@
-var sql = require('../db/db')
+var sql = require('../config/db')
 
 var Currency = function (currency) {
     this.code = currency.code

@@ -1,4 +1,4 @@
-var sql = require('../db/db')
+var sql = require('../config/db')
 
 var Share = function (share) {
     this.amount = share.amount

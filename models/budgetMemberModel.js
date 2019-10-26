@@ -1,4 +1,4 @@
-var sql = require('../db/db')
+var sql = require('../config/db')
 
 var Budget_Member = function (budget_member) {
     this.nickname = budget_member.nickname

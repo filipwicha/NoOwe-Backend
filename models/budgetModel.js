@@ -1,4 +1,4 @@
-var sql = require('../db/db')
+var sql = require('../config/db')
 
 var Budget = function (budget) {
     this.id = budget.id
