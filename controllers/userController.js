@@ -1,64 +1,57 @@
-const User = require('../models/userModel')
+const db = require('../config/db.config')
+const env = require('../config/env')
+const User = db.user
 
-exports.login = function(req,res,next){
-    // if user exists the token was sent with the request
-    if(req.user){
-     //if user exists then go to next middleware
-       next();
-    }
-  // token was not sent with request send error to user
-    else{
-       res.status(500).json({error:'login is required'});
-    }
-  }
+var jwt = require('jsonwebtoken')
+var bcrypt = require('bcryptjs')
 
-exports.list_all_users = function (req, res) {
-    User.getAllUsers(function (err, user) {
-        if (err) {
-            res.send(err)
-            console.log('res', user)
-        } else {
-            res.send(user)
-        }
+exports.signup = (req, res) => {
+    // Save User to Database
+    console.log("Processing func -> SignUp")
+    console.log(req.body)
+
+    User.create({
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 8)
+    }).then(user => {
+        res.status(200).send("User registered successfully!")
+    }).catch(err => {
+        res.status(500).send("Error -> " + err)
     })
 }
 
-exports.create_an_user = function (req, res) {
-    User.createUser(new User(req.body), function (err, user) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.json(user)
+exports.signin = (req, res) => {
+    console.log("Sign-In")
+
+    User.findOne({
+        where: {
+            email: req.body.email
         }
+    }).then(user => {
+        if (!user) {
+            return res.status(404).send('User Not Found.')
+        }
+
+        var passwordIsValid = bcrypt.compareSync(req.body.password, user.password)
+        if (!passwordIsValid) {
+            return res.status(401).send({ auth: false, accessToken: null, reason: "Invalid Password!" })
+        }
+
+        var token = jwt.sign({ id: user.id }, env.secret, {
+            expiresIn: 86400 // expires in 24 hours
+        })
+
+        res.status(200).send({ auth: true, accessToken: token, id: user.id })
+
+    }).catch(err => {
+        res.status(500).send('Error -> ' + err)
     })
 }
 
-exports.read_an_user = function (req, res) {
-    User.getUserById(req.params.userId, function (err, user) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.json(user)
-        }
-    })
-}
-
-exports.update_an_user = function (req, res) {
-    User.updateById(req.params.userId, new User(req.body), function (err, user) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.json(user)
-        }
-    })
-}
-
-exports.delete_an_user = function (req, res) {
-    User.removeById(req.params.userId, function (err, user) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.json({ message: 'User ' + req.params.id + " deleted successfully" })
-        }
+exports.getUsers = (req, res) => {
+    User.findAll().then(users => {
+        res.status(200).send(users)
+    }).catch(err => {
+        res.status(500).send("Error -> " + err)
     })
 }

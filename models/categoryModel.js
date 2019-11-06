@@ -1,15 +1,11 @@
 // module.exports = (sequelize, Sequelize) => {
-//     const Currency = sequelize.define('currencies', {
+//     const Category = sequelize.define('categories', {
 //         id: {
 //             type: Sequelize.INTEGER,
 //             primaryKey: true,
 //             allowNull: false
-//         },
-//         code: {
-//             type: Sequelize.STRING,
-//             allowNull: false
 //         }
 //     })
 
-//     return Currency
+//     return Category
 // }
