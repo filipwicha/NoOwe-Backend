@@ -10,7 +10,7 @@ const db = require('./config/db.config')
 
 // force: true will drop the table if it already exists
 db.sequelize.sync({ force: true }).then(() => {
-    console.log('Resync with')
+    console.log('RESYNC DONE')
 })
 
 // Create a Server

@@ -22,10 +22,5 @@ module.exports = (sequelize, Sequelize) => {
         }
     }, {timestamps: false})
 
-    // User.associate = function(models){
-    //     models.User.hasMany(models.Budget, { onDelete: 'cascade' })
-    //     models.User.hasMany(models.BudgetMember, { onDelete: 'cascade' })
-    // }
-
     return User
 }
