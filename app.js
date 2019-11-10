@@ -8,17 +8,20 @@ require('./routes/routes')(app)
 
 const db = require('./config/db.config')
 
+var server
+
 // force: true will drop the table if it already exists
-db.sequelize.sync({ force: true }).then(() => {
-    console.log('RESYNC DONE')
+db.sequelize.sync({ force: false }).then(() => {
+    console.log('\nRESYNC DONE\n')
+    server = app.listen(3000, function () {
+        console.log('App listening at http://localhost:' + server.address().port)
+    })
+
+    
 })
 
 // Create a Server
-var server = app.listen(3000, function () {
 
-
-})
-console.log('App listening at http://localhost:' + server.address().port)
 
 
 

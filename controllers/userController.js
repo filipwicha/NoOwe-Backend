@@ -38,7 +38,7 @@ exports.signin = (req, res) => {
         }
 
         var token = jwt.sign({ id: user.id }, env.secret, {
-            expiresIn: 86400 // expires in 24 hours
+            expiresIn: 60*60*24*180 // expires in 24 hours
         })
 
         res.status(200).send({ auth: true, accessToken: token, id: user.id })
@@ -48,7 +48,7 @@ exports.signin = (req, res) => {
     })
 }
 
-exports.getUsers = (req, res) => {
+exports.getall = (req, res) => {
     User.findAll().then(users => {
         res.status(200).send(users)
     }).catch(err => {
