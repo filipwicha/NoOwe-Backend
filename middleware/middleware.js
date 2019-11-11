@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken')
 const db = require('../config/db.config.js')
-const User = db.user
 const env = require('../config/env')
 
+const User = db.user
 
 module.exports.checkDuplicateUserNameOrEmail = function(req, res, next) {
     // -> Check Email is already in use

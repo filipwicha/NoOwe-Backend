@@ -32,10 +32,10 @@ exports.create = (req, res) => {
     console.log(req.body)
 
     Transaction.create({
-        name: req.body.name,
-        color: req.body.color,
-        owner_id: req.id,
-        currency_id: req.body.currency_id
+        title: req.body.title,
+        date: db.Sequelize.fn('NOW'),
+        budget_id: req.params.budget_id,
+        category_id: req.body.category_id
     }).then(transaction => {
         res.status(200).send("Transaction " + transaction.id + " created successfully!")
     }).catch(err => {
@@ -48,10 +48,10 @@ exports.update = (req, res) => {
     console.log(req.body)
 
     Transaction.update({
-        name: req.body.name,
-        color: req.body.color,
-        owner_id: req.body.owner_id,
-        currency_id: req.body.currency_id
+        title: req.body.title,
+        date: req.body.date,
+        budget_id: req.body.budget_id,
+        category_id: req.body.category_id
     },
         {
             where: {
