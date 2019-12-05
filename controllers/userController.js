@@ -37,11 +37,12 @@ exports.signin = (req, res) => {
             return res.status(401).send({ auth: false, accessToken: null, reason: "Invalid Password!" })
         }
 
+        var expiresIn = 60*60*24*180
         var token = jwt.sign({ id: user.id }, env.secret, {
-            expiresIn: 60*60*24*180 // expires in 24 hours
+            expiresIn: expiresIn // expires in 24 hours
         })
 
-        res.status(200).send({ auth: true, accessToken: token, id: user.id })
+        res.status(200).send({ auth: true, expiresIn: JSON.stringify(new Date(expiresIn*1000)), accessToken: token, id: user.id })
 
     }).catch(err => {
         res.status(500).send('Error -> ' + err)
