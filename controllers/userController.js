@@ -39,14 +39,19 @@ exports.signin = (req, res) => {
 
         var expiresIn = 60*60*24*180
         var token = jwt.sign({ id: user.id }, env.secret, {
-            expiresIn: expiresIn // expires in 24 hours
+            expiresIn: expiresIn // expires in x hours
         })
         
-        res.status(200).send({ auth: true, expiresIn: new Date(1970, 0, 1).setSeconds(expiresIn), xdd: expiresIn, accessToken: token, id: user.id })
+        res.status(200).send({ auth: true, expiresIn: getFutureDateWithSeconds(expiresIn), accessToken: token, id: user.id })
 
     }).catch(err => {
         res.status(500).send('Error -> ' + err)
     })
+}
+
+function getFutureDateWithSeconds(secondsFromNowToAdd){
+    return new Date(new Date().getTime() + secondsFromNowToAdd*1000) 
+
 }
 
 exports.getall = (req, res) => {
