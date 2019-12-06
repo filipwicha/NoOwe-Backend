@@ -41,8 +41,8 @@ exports.signin = (req, res) => {
         var token = jwt.sign({ id: user.id }, env.secret, {
             expiresIn: expiresIn // expires in 24 hours
         })
-        
-        res.status(200).send({ auth: true, expiresIn: new Date(expiresIn*1000), accessToken: token, id: user.id })
+
+        res.status(200).send({ auth: true, expiresIn: new Date(expiresIn*1000), xdd: expiresIn, accessToken: token, id: user.id })
 
     }).catch(err => {
         res.status(500).send('Error -> ' + err)
