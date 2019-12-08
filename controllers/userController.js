@@ -42,11 +42,11 @@ exports.signin = (req, res) => {
             expiresIn: expiresIn // expires in x hours
         })
         
-        print("Login successfull")
+        console.log("Login successfull")
         res.status(200).send({ auth: true, expiresIn: getFutureDateWithSeconds(expiresIn), accessToken: token, id: user.id })
 
     }).catch(err => {
-        print("Login unsuccessfull")
+        console.log("Login unsuccessfull")
         res.status(500).send("Err " + err)
     })
 }
