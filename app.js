@@ -1,15 +1,53 @@
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-const port = process.env.PORT || 3000
-
-const mysqlConnection = require('./db/db')
-
-app.use(bodyParser.urlencoded({ extended: true }))
+var express = require('express')
+var app = express()
+var bodyParser = require('body-parser')
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.listen(port)
-console.log('Port ' + port)
+require('./routes/routes')(app)
 
-var routes = require('./routes/userRoutes')
-routes(app)
+const db = require('./config/db.config')
+
+var server
+
+// force: true will drop the table if it already exists
+db.sequelize.sync({ force: false }).then(() => {
+    console.log('\nRESYNC DONE\n')
+    server = app.listen(process.env.PORT || 3000, function () {
+        console.log('App listening at http://localhost:' + server.address().port)
+    })
+
+    
+})
+
+// Create a Server
+
+
+
+
+
+
+// const express = require('express')
+// const app = express()
+// const bodyParser = require('body-parser')
+// const port = process.env.PORT || 3000
+
+// app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.json())
+
+// app.listen(port)
+// console.log('Port ' + port)
+
+// var userRoutes = require('./routes/userRoutes')
+// var budgetRoutes = require('./routes/budgetRoutes')
+// var shareRoutes = require('./routes/shareRoutes')
+// var budgetMemberRoutes = require('./routes/budgetMemberRoutes')
+// var transactionRoutes = require('./routes/transactionRoutes')
+// var currencyRoutes = require('./routes/currencyRoutes')
+
+// userRoutes(app)
+// budgetRoutes(app)
+// shareRoutes(app)
+// budgetMemberRoutes(app)
+// transactionRoutes(app)
+// currencyRoutes(app)
