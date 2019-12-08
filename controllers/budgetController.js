@@ -11,6 +11,7 @@ exports.getall = (req, res) => {
         }
     }).then(budgets => {
         res.status(200).send(budgets)
+        console.log(JSON.stringify(budgets))
     }).catch(err => {
         res.status(500).send("Error -> " + err)
     })
