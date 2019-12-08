@@ -12,7 +12,7 @@ exports.getall = (req, res) => {
     }).then(budgetMembers => {
         res.status(200).send(budgetMembers)
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }
 
@@ -23,7 +23,7 @@ exports.getone = (req, res) => {
     BudgetMember.findByPk(req.params.id).then(budgetMember => {
         res.status(200).send(budgetMember)
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }
 
@@ -38,7 +38,7 @@ exports.create = (req, res) => {
     }).then(budgetMember => {
         res.status(200).send("BudgetMember " + budgetMember.id + " created successfully!")
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }
 
@@ -58,7 +58,7 @@ exports.update = (req, res) => {
         }).then(budgetMember => {
             res.status(200).send("BudgetMember " + req.params.id + " updated successfully!")
         }).catch(err => {
-            res.status(500).send("Error -> " + err)
+            res.status(500).send({code: 500, reason: "Error -> " + err })
         })
 }
 
@@ -72,6 +72,6 @@ exports.delete = (req, res) => {
     }).then(budgetMember => {
         res.status(200).send("BudgetMember " + req.params.id + " destroyed successfully!")
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }

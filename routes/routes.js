@@ -14,7 +14,7 @@ module.exports = function (app) {
   app.get('/user', [middleware.verifyToken], userController.getall)
 
   app.get('/budget/:id', [middleware.verifyToken], budgetController.getone)
-  app.get('/budgets', [middleware.verifyToken], budgetController.getall)
+  app.get('/budget', [middleware.verifyToken], budgetController.getall)
   app.post('/budget', [middleware.verifyToken], budgetController.create)
   app.put('/budget/:id', [middleware.verifyToken], budgetController.update)
   app.delete('/budget/:id', [middleware.verifyToken], budgetController.delete)
