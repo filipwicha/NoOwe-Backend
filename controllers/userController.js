@@ -16,7 +16,7 @@ exports.signup = (req, res) => {
     }).then(user => {
         res.status(200).send("User registered successfully!")
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({ code: 500, reason: "Invalid Password!" })
     })
 }
 
@@ -29,12 +29,12 @@ exports.signin = (req, res) => {
         }
     }).then(user => {
         if (!user) {
-            return res.status(404).send({ auth: false, reason: "User not found" })
+            return res.status(404).send({ code: 404, reason: "User not found" })
         }
 
         var passwordIsValid = bcrypt.compareSync(req.body.password, user.password)
         if (!passwordIsValid) {
-            return res.status(401).send({ auth: false, reason: "Invalid Password!" })
+            return res.status(401).send({  code: 401, reason: "Invalid Password!" })
         }
 
         var expiresIn = 60*60*24*180
@@ -45,7 +45,7 @@ exports.signin = (req, res) => {
         res.status(200).send({ auth: true, expiresIn: getFutureDateWithSeconds(expiresIn), accessToken: token, id: user.id })
 
     }).catch(err => {
-        res.status(500).send({ auth: false, reason: err })
+        res.status(500).send({ code: 500, reason: err })
     })
 }
 
@@ -58,6 +58,6 @@ exports.getall = (req, res) => {
     User.findAll().then(users => {
         res.status(200).send(users)
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, response: err})
     })
 }
