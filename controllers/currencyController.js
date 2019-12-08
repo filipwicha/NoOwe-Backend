@@ -8,6 +8,6 @@ exports.getall = (req, res) => {
     Currency.findAll().then(currencies => {
         res.status(200).send(currencies)
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }

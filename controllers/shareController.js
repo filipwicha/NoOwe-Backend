@@ -12,7 +12,7 @@ exports.getall = (req, res) => {
     }).then(shares => {
         res.status(200).send(shares)
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }
 
@@ -23,7 +23,7 @@ exports.getone = (req, res) => {
     Share.findByPk(req.params.id).then(share => {
         res.status(200).send(share)
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }
 
@@ -38,7 +38,7 @@ exports.create = (req, res) => {
     }).then(share => {
         res.status(200).send("Share " + share.id + " created successfully!")
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }
 
@@ -58,7 +58,7 @@ exports.update = (req, res) => {
         }).then(share => {
             res.status(200).send("Share " + req.params.id + " updated successfully!")
         }).catch(err => {
-            res.status(500).send("Error -> " + err)
+            res.status(500).send({code: 500, reason: "Error -> " + err })
         })
 }
 
@@ -72,6 +72,6 @@ exports.delete = (req, res) => {
     }).then(share => {
         res.status(200).send("Share " + req.params.id + " destroyed successfully!")
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }

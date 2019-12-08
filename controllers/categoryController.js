@@ -8,6 +8,6 @@ exports.getall = (req, res) => {
     Category.findAll().then(categories => {
         res.status(200).send(categories)
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }

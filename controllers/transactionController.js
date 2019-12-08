@@ -12,7 +12,7 @@ exports.getall = (req, res) => {
     }).then(transactions => {
         res.status(200).send(transactions)
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }
 
@@ -23,7 +23,7 @@ exports.getone = (req, res) => {
     Transaction.findByPk(req.params.id).then(transaction => {
         res.status(200).send(transaction)
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }
 
@@ -39,7 +39,7 @@ exports.create = (req, res) => {
     }).then(transaction => {
         res.status(200).send("Transaction " + transaction.id + " created successfully!")
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }
 
@@ -60,7 +60,7 @@ exports.update = (req, res) => {
         }).then(transaction => {
             res.status(200).send("Transaction " + req.params.id + " updated successfully!")
         }).catch(err => {
-            res.status(500).send("Error -> " + err)
+            res.status(500).send({code: 500, reason: "Error -> " + err })
         })
 }
 
@@ -74,6 +74,6 @@ exports.delete = (req, res) => {
     }).then(transaction => {
         res.status(200).send("Transaction " + req.params.id + " destroyed successfully!")
     }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        res.status(500).send({code: 500, reason: "Error -> " + err })
     })
 }
