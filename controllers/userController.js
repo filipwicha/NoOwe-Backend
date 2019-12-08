@@ -29,12 +29,12 @@ exports.signin = (req, res) => {
         }
     }).then(user => {
         if (!user) {
-            return res.status(404).send({ auth: false, reason: "User not found" })
+            return res.status(404).send("User not found" )
         }
 
         var passwordIsValid = bcrypt.compareSync(req.body.password, user.password)
         if (!passwordIsValid) {
-            return res.status(401).send({ auth: false, reason: "Invalid Password!" })
+            return res.status(401).send("Invalid Password!")
         }
 
         var expiresIn = 60*60*24*180
