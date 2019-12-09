@@ -11,6 +11,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         date: {
             type: Sequelize.DATE,
+            defaultValue: new Date(),
             allowNull: false
         }/* ,
         budget_id: {
