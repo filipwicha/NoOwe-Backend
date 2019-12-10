@@ -46,7 +46,7 @@ exports.create = (req, res) => {
             budget_id: budget.id,
         }).then(budgetMember => {
             
-            nicknames =  JSON.parse(req.body.budget_members)
+            nicknames = req.body.budget_members
             nicknames.forEach(nickname => {
                 BudgetMember.create({
                     nickname: nickname,
