@@ -8,7 +8,7 @@ exports.getall = (req, res) => {
 
     Budget.findAll({
         where: {
-          owner_id: req.id
+            owner_id: req.id
         },
         include: [db.transaction]
     }).then(budgets => {
@@ -44,7 +44,20 @@ exports.create = (req, res) => {
             nickname: "Owner",
             user_id: req.id,
             budget_id: budget.id,
-        }).then( budgetMember => {
+        }).then(budgetMember => {
+            var nicknames = req.body.budget_members
+            nicknames.forEach(nickname => {
+                BudgetMember.create({
+                    nickname: nickname,
+                    user_id: req.id,
+                    budget_id: budget.id,
+                })
+            })
+            BudgetMember.create({
+                nickname: "Owner",
+                user_id: null,
+                budget_id: budget.id,
+            })
             res.status(200).send("Budget " + budget.id + " with budgetMember " + budgetMember.id + " created successfully!")
         })
     }).catch(err => {
