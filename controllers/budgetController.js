@@ -46,7 +46,8 @@ exports.create = (req, res) => {
             budget_id: budget.id,
         }).then(budgetMember => {
             
-            nicknames = req.body.budget_members
+            nicknames = req.body.budget_members.filter(Boolean)
+            
             nicknames.forEach(nickname => {
                 BudgetMember.create({
                     nickname: nickname,
@@ -55,9 +56,10 @@ exports.create = (req, res) => {
                 })
             })
 
-            res.status(200).send("Budget " + budget.id + " with budgetMember " + budgetMember.id + " created successfully!")
+            res.status(200).send("Budget " + budget.id + " with budgetMember " + " created successfully!")
         })
     }).catch(err => {
+        console.log(err)
         res.status(500).send("Error -> " + err)
     })
 }
