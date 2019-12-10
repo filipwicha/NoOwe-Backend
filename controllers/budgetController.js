@@ -9,7 +9,7 @@ exports.getall = (req, res) => {
         where: {
           owner_id: req.id
         },
-        include: [transactions]
+        include: [db.transaction]
     }).then(budgets => {
         res.status(200).send(budgets)
         console.log(JSON.stringify(budgets))

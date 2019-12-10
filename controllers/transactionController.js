@@ -8,7 +8,8 @@ exports.getall = (req, res) => {
     Transaction.findAll({
         where: {
           budget_id: req.params.id
-        }
+        },
+        include: [db.share]
     }).then(transactions => {
         res.status(200).send(transactions)
     }).catch(err => {

@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
         //     allowNull: false
         // },
         amount: {
-            type: Sequelize.DECIMAL(12,2),
+            type: Sequelize.DOUBLE,
             allowNull: false
         }/* ,
         transaction_id: {
