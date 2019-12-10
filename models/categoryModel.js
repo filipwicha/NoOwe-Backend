@@ -4,6 +4,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             primaryKey: true,
             allowNull: false
+        },
+        photo: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     }, {timestamps: false})
 
