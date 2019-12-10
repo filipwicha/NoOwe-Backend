@@ -45,7 +45,8 @@ exports.create = (req, res) => {
             user_id: req.id,
             budget_id: budget.id,
         }).then(budgetMember => {
-            var nicknames = req.body.budget_members
+            
+            nicknames =  JSON.parse(req.body.budget_members)
             nicknames.forEach(nickname => {
                 BudgetMember.create({
                     nickname: nickname,
@@ -53,11 +54,7 @@ exports.create = (req, res) => {
                     budget_id: budget.id,
                 })
             })
-            BudgetMember.create({
-                nickname: "Owner",
-                user_id: null,
-                budget_id: budget.id,
-            })
+
             res.status(200).send("Budget " + budget.id + " with budgetMember " + budgetMember.id + " created successfully!")
         })
     }).catch(err => {
