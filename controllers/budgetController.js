@@ -1,5 +1,6 @@
 const db = require('../config/db.config')
 const Budget = db.budget
+const BudgetMember = db.budgetMember
 
 exports.getall = (req, res) => {
     console.log("Processing func -> getall budgets")
@@ -39,7 +40,13 @@ exports.create = (req, res) => {
         owner_id: req.id,
         currency_id: req.body.currency_id
     }).then(budget => {
-        res.status(200).send("Budget " + budget.id + " created successfully!")
+        BudgetMember.create({
+            nickname: "Owner",
+            user_id: req.id,
+            budget_id: budget.id,
+        }).then( budgetMember => {
+            res.status(200).send("Budget " + budget.id + " with budgetMember " + budgetMember.id + " created successfully!")
+        })
     }).catch(err => {
         res.status(500).send("Error -> " + err)
     })
