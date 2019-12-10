@@ -7,7 +7,7 @@ exports.getall = (req, res) => {
 
     Transaction.findAll({
         where: {
-          budget_id: req.params.id
+          budget_id: req.params.budget_id
         },
         include: [db.share]
     }).then(transactions => {
