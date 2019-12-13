@@ -33,6 +33,7 @@ module.exports = function (app) {
 
   app.get('/budget_member/:id', [middleware.verifyToken], budgetMemberController.getone)
   app.get('/budget_members/:budget_id', [middleware.verifyToken], budgetMemberController.getall)
+  app.get('/budget_member/this/:budget_id', [middleware.verifyToken], budgetMemberController.getthisbudgetmember)
   app.post('/budget_member/:budget_id', [middleware.verifyToken], budgetMemberController.create)
   app.put('/budget_member/:id', [middleware.verifyToken], budgetMemberController.update)
   app.delete('/budget_member/:id', [middleware.verifyToken], budgetMemberController.delete)
