@@ -50,7 +50,7 @@ exports.create = (req, res) => {
             nicknames.forEach(nickname => {
                 BudgetMember.create({
                     nickname: nickname,
-                    user_id: req.id,
+                    user_id: null,
                     budget_id: budget.id,
                 })
             })

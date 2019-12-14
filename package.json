@@ -19,6 +19,7 @@
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "mysql2": "^2.0.0",
+    "nodemon": "^2.0.2",
     "passport-auth-token": "^1.0.1",
     "passport-jwt": "^4.0.0",
     "req-flash": "0.0.3",
