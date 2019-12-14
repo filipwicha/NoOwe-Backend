@@ -39,7 +39,7 @@ exports.create = (req, res) => {
         owner_id: req.id,
         currency_id: req.body.currency_id
     }).then(budget => {
-        console.log(budget)
+        console.log("BUDGETID " + budget.id)
         BudgetMember.create({
             nickname: "Owner",
             user_id: req.id,
