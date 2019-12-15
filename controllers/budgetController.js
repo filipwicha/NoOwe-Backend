@@ -55,7 +55,7 @@ exports.create = (req, res) => {
         nicknames.forEach(nickname => {
             BudgetMember.create({
                 nickname: nickname,
-                user_id: null,
+                user_id: -1,
                 budget_id: budget.id,
             }).catch(err => {
                 console.log("Error -> error creating budgetmember from nicknames" + err)
