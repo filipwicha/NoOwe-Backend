@@ -1,5 +1,6 @@
 const db = require('../config/db.config')
 const Transaction = db.transaction
+const Share = db.share
 
 exports.getall = (req, res) => {
     console.log("Processing func -> getall transactions")
@@ -7,7 +8,7 @@ exports.getall = (req, res) => {
 
     Transaction.findAll({
         where: {
-          budget_id: req.params.budget_id
+            budget_id: req.params.budget_id
         },
         include: [db.share]
     }).then(transactions => {
@@ -38,6 +39,18 @@ exports.create = (req, res) => {
         budget_id: req.params.budget_id,
         category_id: req.body.category_id
     }).then(transaction => {
+        var shares = JSON.parse(req.body.shares)
+        
+        shares.forEach(share => {
+            Share.create({
+                amount: share.amount,
+                transaction_id: transaction.id,
+                member_id: share.member_id
+            }).catch(err => {
+                console.log("Error -> error creating budgetmember from nicknames" + err)
+            })
+        })
+
         res.status(200).send("Transaction " + transaction.id + " created successfully!")
     }).catch(err => {
         res.status(500).send("Error -> " + err)
