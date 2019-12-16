@@ -39,8 +39,8 @@ exports.create = (req, res) => {
         budget_id: req.params.budget_id,
         category_id: req.body.category_id
     }).then(transaction => {
-        var shares = JSON.parse(req.body.shares)
-        
+        var shares = req.body.shares
+
         shares.forEach(share => {
             Share.create({
                 amount: share.amount,
