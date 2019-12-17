@@ -10,6 +10,7 @@ exports.getall = (req, res) => {
           budget_id: req.params.budget_id
         }
     }).then(budgetMembers => {
+        console.log(budgetMembers)
         res.status(200).send(budgetMembers)
     }).catch(err => {
         res.status(500).send("Error -> " + err)
