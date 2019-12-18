@@ -41,5 +41,4 @@ module.exports = function (app) {
   app.get('/currencies', [middleware.verifyToken], currencyController.getall)
 
   app.get('/categories', [middleware.verifyToken], categoryController.getall)
-
 }
