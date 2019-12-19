@@ -8,6 +8,10 @@ module.exports = (sequelize, Sequelize) => {
         photo: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        emoji: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     }, {timestamps: false})
 
