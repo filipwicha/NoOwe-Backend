@@ -11,7 +11,7 @@ const db = require('./config/db.config')
 var server
 
 // force: true will drop the table if it already exists
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
     console.log('\nRESYNC DONE\n')
     server = app.listen(process.env.PORT || 3000, function () {
         console.log('App listening at http://localhost:' + server.address().port)
