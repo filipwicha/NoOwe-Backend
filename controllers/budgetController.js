@@ -21,31 +21,7 @@ exports.getall = (req, res) => {
         console.log(budgets)
         res.status(200).send(budgets)
         })
-    // }).then(budgetsWithBudgetMembers => {
-        // var keyToDelete = "budget_members"
-
-        // var budgets = budgetsWithBudgetMembers.map ( budget =>{
-        //     var budgetWithoutKey = {}
-        //     Object.keys(budget).forEach( key => {
-        //         if (key != keyToDelete){
-        //             budgetWithoutKey[key] = budget[key]
-        //         }
-        //     })
-
-        //     return budgetWithoutKey
-        // })
     })
-
-    // Budget.findAll({
-    //     where: {
-    //         owner_id: req.id
-    //     }
-    // }).then(budgets => {
-    //     res.status(200).send(budgets)
-    //     console.log(JSON.stringify(budgets))
-    // }).catch(err => {
-    //     res.status(500).send("Error -> " + err)
-    // })
 }
 
 exports.getone = (req, res) => {
