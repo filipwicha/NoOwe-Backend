@@ -6,16 +6,46 @@ exports.getall = (req, res) => {
     console.log("Processing func -> getall budgets")
     console.log(req.body)
 
-    Budget.findAll({
+    BudgetMember.findAll({
         where: {
-            owner_id: req.id
+            user_id: req.id 
         }
-    }).then(budgets => {
+    }).then(budgetMembers => {
+        var budgetIds = budgetMembers.map(budgetMember => {return budgetMember.budget_id})
+        Budget.findAll({
+            where: {
+                id: budgetIds
+            }
+        }).then( budgets => {
+
+        console.log(budgets)
         res.status(200).send(budgets)
-        console.log(JSON.stringify(budgets))
-    }).catch(err => {
-        res.status(500).send("Error -> " + err)
+        })
+    // }).then(budgetsWithBudgetMembers => {
+        // var keyToDelete = "budget_members"
+
+        // var budgets = budgetsWithBudgetMembers.map ( budget =>{
+        //     var budgetWithoutKey = {}
+        //     Object.keys(budget).forEach( key => {
+        //         if (key != keyToDelete){
+        //             budgetWithoutKey[key] = budget[key]
+        //         }
+        //     })
+
+        //     return budgetWithoutKey
+        // })
     })
+
+    // Budget.findAll({
+    //     where: {
+    //         owner_id: req.id
+    //     }
+    // }).then(budgets => {
+    //     res.status(200).send(budgets)
+    //     console.log(JSON.stringify(budgets))
+    // }).catch(err => {
+    //     res.status(500).send("Error -> " + err)
+    // })
 }
 
 exports.getone = (req, res) => {
@@ -50,7 +80,7 @@ exports.create = (req, res) => {
             console.log("Error -> error creating budgetmember for owner " + err)
         })
 
-        var nicknames = req.body.budget_members.filter(nickname => {return (nickname != "" || nickname != null ? true : false )})
+        var nicknames = req.body.budget_members.filter(nickname => { return (nickname != "" || nickname != null ? true : false) })
 
         nicknames.forEach(nickname => {
             BudgetMember.create({
