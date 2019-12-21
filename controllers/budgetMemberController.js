@@ -17,6 +17,22 @@ exports.getall = (req, res) => {
     })
 }
 
+exports.addtobudget = (req, res) => {
+    BudgetMember.update({ 
+        user_id: req.id, 
+        private_key: null
+    },
+        {
+            where: {
+                private_key: req.params.private_key
+            }
+        }).then(budgetMember => {
+            res.status(200).send("BudgetMember updated successfully!")
+        }).catch(err => {
+            res.status(500).send("Error -> " + err)
+        })
+}
+
 exports.getone = (req, res) => {
     console.log("Processing func -> getone budgetMember")
     console.log(req.body)

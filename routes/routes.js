@@ -6,6 +6,8 @@ const shareController = require('../controllers/shareController')
 const budgetMemberController = require('../controllers/budgetMemberController')
 const currencyController = require('../controllers/currencyController')
 const categoryController = require('../controllers/categoryController')
+const demoController = require('../controllers/demoController')
+
 
 module.exports = function (app) {
   app.post('/auth/signup', [middleware.checkDuplicateUserNameOrEmail], userController.signup)
@@ -32,6 +34,7 @@ module.exports = function (app) {
   app.delete('/share/:id', [middleware.verifyToken], shareController.delete)
 
   app.get('/budget_member/:id', [middleware.verifyToken], budgetMemberController.getone)
+  app.get('/budget_member/:private_key', [middleware.verifyToken], budgetMemberController.addtobudget)
   app.get('/budget_members/:budget_id', [middleware.verifyToken], budgetMemberController.getall)
   app.get('/budget_member/this/:budget_id', [middleware.verifyToken], budgetMemberController.getthisbudgetmember)
   app.post('/budget_member/:budget_id', [middleware.verifyToken], budgetMemberController.create)
@@ -41,4 +44,6 @@ module.exports = function (app) {
   app.get('/currencies', [middleware.verifyToken], currencyController.getall)
 
   app.get('/categories', [middleware.verifyToken], categoryController.getall)
+  
+  app.get('/demo', demoController.demo)
 }
