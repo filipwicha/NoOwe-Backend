@@ -56,7 +56,7 @@ exports.create = (req, res) => {
             console.log("Error -> error creating budgetmember for owner " + err)
         })
 
-        var nicknames = JSON.parse(JSON.stringify(req.body.budget_members)).filter(nickname => { return (nickname != "" || nickname != null ? true : false) })
+        var nicknames = req.body.budget_members
 
         nicknames.forEach(nickname => {
             BudgetMember.create({
