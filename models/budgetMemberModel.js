@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
         private_key: {
             type: Sequelize.STRING,
             allowNull: true,
-            defaultValue: null
+            defaultValue: " "
         }/* ,
         budget_id: {
             type: Sequelize.INTEGER,

@@ -52,7 +52,7 @@ exports.create = (req, res) => {
             nickname: "Owner",
             user_id: req.id,
             budget_id: budget.id,
-            private_key: null
+            private_key: " "
         }).catch(err => {
             console.log("Error -> error creating budgetmember for owner " + err)
         })
