@@ -17,6 +17,7 @@ exports.getall = (req, res) => {
 }
 
 exports.addtobudget = (req, res) => {
+    console.log("PERFORMING ADD TU BUDGET WITH CODE: " +  req.params.private_key + " ON USER: " + req.id)
     BudgetMember.update({ 
         user_id: req.id, 
         private_key: " "
@@ -26,6 +27,7 @@ exports.addtobudget = (req, res) => {
                 private_key: req.params.private_key
             }
         }).then(budgetMember => {
+            console.log("Donce")
             res.status(200).send("BudgetMember updated successfully!")
         }).catch(err => {
             res.status(500).send("Error -> " + err)
