@@ -52,6 +52,7 @@ exports.create = (req, res) => {
             nickname: "Owner",
             user_id: req.id,
             budget_id: budget.id,
+            private_key: null
         }).catch(err => {
             console.log("Error -> error creating budgetmember for owner " + err)
         })
@@ -63,6 +64,7 @@ exports.create = (req, res) => {
                 nickname: nickname,
                 user_id: -1,
                 budget_id: budget.id,
+                private_key: makePrivateKey(4)
             }).catch(err => {
                 console.log("Error -> error creating budgetmember from nicknames" + err)
             })
@@ -110,3 +112,15 @@ exports.delete = (req, res) => {
         res.status(500).send("Error -> " + err)
     })
 }
+
+function makePrivateKey(length) {
+    var result           = ''
+    var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789'
+    var charactersLength = characters.length
+
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength))
+    }
+
+    return result
+ }
