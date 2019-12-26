@@ -45,17 +45,6 @@ exports.getone = (req, res) => {
     })
 }
 
-exports.getthisbudgetmember = (req, res) => {
-    console.log("Processing func -> getthisbudgetmember budgetMember")
-    
-
-    BudgetMember.findOne({ where: {budget_id: req.params.budget_id, user_id: req.id}}).then(budgetMember => {
-        res.status(200).send(budgetMember)
-    }).catch(err => {
-        res.status(500).send("Error -> " + err)
-    })
-}
-
 exports.create = (req, res) => {
     console.log("Processing func -> create budgetMembers")
     
