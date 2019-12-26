@@ -33,12 +33,10 @@ module.exports = function (app) {
   app.put('/share/:id', [middleware.verifyToken], shareController.update)
   app.delete('/share/:id', [middleware.verifyToken], shareController.delete)
 
-  app.get('/budget_member/:id', [middleware.verifyToken], budgetMemberController.getone)
-  app.get('/budget_member/:private_key', [middleware.verifyToken], budgetMemberController.addtobudget)
+  app.put('/budget_member/:private_key', [middleware.verifyToken], budgetMemberController.addtobudget)
   app.get('/budget_members/:budget_id', [middleware.verifyToken], budgetMemberController.getall)
   app.get('/budget_member/this/:budget_id', [middleware.verifyToken], budgetMemberController.getthisbudgetmember)
   app.post('/budget_member/:budget_id', [middleware.verifyToken], budgetMemberController.create)
-  app.put('/budget_member/:id', [middleware.verifyToken], budgetMemberController.update)
   app.delete('/budget_member/:id', [middleware.verifyToken], budgetMemberController.delete)
 
   app.get('/currencies', [middleware.verifyToken], currencyController.getall)

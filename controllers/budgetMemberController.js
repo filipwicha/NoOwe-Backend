@@ -20,7 +20,7 @@ exports.getall = (req, res) => {
 exports.addtobudget = (req, res) => {
     BudgetMember.update({ 
         user_id: req.id, 
-        private_key: null
+        private_key: " "
     },
         {
             where: {
