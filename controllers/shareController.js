@@ -3,7 +3,7 @@ const Share = db.share
 
 exports.getall = (req, res) => {
     console.log("Processing func -> getall shares")
-    console.log(req.body)
+    
 
     Share.findAll({
         where: {
@@ -18,7 +18,7 @@ exports.getall = (req, res) => {
 
 exports.getone = (req, res) => {
     console.log("Processing func -> getone share")
-    console.log(req.body)
+    
 
     Share.findByPk(req.params.id).then(share => {
         res.status(200).send(share)
@@ -29,7 +29,7 @@ exports.getone = (req, res) => {
 
 exports.create = (req, res) => {
     console.log("Processing func -> create shares")
-    console.log(req.body)
+    
 
     Share.create({
         amount: req.body.amount,
@@ -44,8 +44,7 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
     console.log("Processing func -> update shares")
-    console.log(req.body)
-
+    
     Share.update({
         amount: req.body.amount,
         member_id: req.body.member_id,
@@ -64,7 +63,7 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
     console.log("Processing func -> delete shares")
-    console.log(req.body)
+    
     Share.destroy({
         where: {
             id: req.params.id

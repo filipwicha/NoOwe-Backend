@@ -8,7 +8,7 @@ var bcrypt = require('bcryptjs')
 exports.signup = (req, res) => {
     // Save User to Database
     console.log("Processing func -> SignUp")
-    console.log(req.body)
+    
 
     User.create({
         email: req.body.email,
@@ -41,12 +41,10 @@ exports.signin = (req, res) => {
         var token = jwt.sign({ id: user.id }, env.secret, {
             expiresIn: expiresIn // expires in x hours
         })
-        
-        console.log("Login successfull")
+         
         res.status(200).send({ auth: true, expiresIn: getFutureDateWithSeconds(expiresIn), accessToken: token, id: user.id })
 
-    }).catch(err => {
-        console.log("Login unsuccessfull")
+    }).catch(err => { 
         res.status(500).send("Err " + err)
     })
 }

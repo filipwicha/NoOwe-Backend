@@ -3,14 +3,13 @@ const BudgetMember = db.budgetMember
 
 exports.getall = (req, res) => {
     console.log("Processing func -> getall budgetMembers")
-    console.log(req.body)
+    
 
     BudgetMember.findAll({
         where: {
           budget_id: req.params.budget_id
         }
-    }).then(budgetMembers => {
-        console.log(budgetMembers)
+    }).then(budgetMembers => { 
         res.status(200).send(budgetMembers)
     }).catch(err => {
         res.status(500).send("Error -> " + err)
@@ -35,7 +34,7 @@ exports.addtobudget = (req, res) => {
 
 exports.getone = (req, res) => {
     console.log("Processing func -> getone budgetMember")
-    console.log(req.body)
+    
 
     BudgetMember.findByPk(req.params.id).then(budgetMember => {
         res.status(200).send(budgetMember)
@@ -46,7 +45,7 @@ exports.getone = (req, res) => {
 
 exports.getthisbudgetmember = (req, res) => {
     console.log("Processing func -> getthisbudgetmember budgetMember")
-    console.log(req.body)
+    
 
     BudgetMember.findOne({ where: {budget_id: req.params.budget_id, user_id: req.id}}).then(budgetMember => {
         res.status(200).send(budgetMember)
@@ -57,7 +56,7 @@ exports.getthisbudgetmember = (req, res) => {
 
 exports.create = (req, res) => {
     console.log("Processing func -> create budgetMembers")
-    console.log(req.body)
+    
 
     BudgetMember.create({
         nickname: req.body.nickname,
@@ -72,7 +71,7 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
     console.log("Processing func -> update budgetMembers")
-    console.log(req.body)
+    
 
     BudgetMember.update({
         nickname: req.body.nickname,
@@ -92,7 +91,7 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
     console.log("Processing func -> delete budgetMembers")
-    console.log(req.body)
+    
     BudgetMember.destroy({
         where: {
             id: req.params.id
