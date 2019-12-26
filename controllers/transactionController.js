@@ -18,17 +18,6 @@ exports.getall = (req, res) => {
     })
 }
 
-exports.getone = (req, res) => {
-    console.log("Processing func -> getone transaction")
-    
-
-    Transaction.findByPk(req.params.id).then(transaction => {
-        res.status(200).send(transaction)
-    }).catch(err => {
-        res.status(500).send("Error -> " + err)
-    })
-}
-
 exports.create = (req, res) => {
     console.log("Processing func -> create transactions")
     
@@ -55,27 +44,6 @@ exports.create = (req, res) => {
     }).catch(err => {
         res.status(500).send("Error -> " + err)
     })
-}
-
-exports.update = (req, res) => {
-    console.log("Processing func -> update transactions")
-    
-
-    Transaction.update({
-        title: req.body.title,
-        date: req.body.date,
-        budget_id: req.body.budget_id,
-        category_id: req.body.category_id
-    },
-        {
-            where: {
-                id: req.params.id
-            }
-        }).then(transaction => {
-            res.status(200).send("Transaction " + req.params.id + " updated successfully!")
-        }).catch(err => {
-            res.status(500).send("Error -> " + err)
-        })
 }
 
 exports.delete = (req, res) => {

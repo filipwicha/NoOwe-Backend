@@ -4,8 +4,7 @@ const env = require('../config/env')
 
 const User = db.user
 
-module.exports.checkDuplicateUserNameOrEmail = function(req, res, next) {
-    // -> Check Email is already in use
+module.exports.checkDuplicateUserNameOrEmail = function(req, res, next) { 
     User.findOne({
         where: {
             email: req.body.email

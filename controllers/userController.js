@@ -53,11 +53,3 @@ function getFutureDateWithSeconds(secondsFromNowToAdd){
     return new Date(new Date().getTime() + secondsFromNowToAdd*1000) 
 
 }
-
-exports.getall = (req, res) => {
-    User.findAll().then(users => {
-        res.status(200).send(users)
-    }).catch(err => {
-        res.status(500).send("Error -> " + err)
-    })
-}

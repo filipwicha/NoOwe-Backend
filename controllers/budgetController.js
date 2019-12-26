@@ -22,17 +22,6 @@ exports.getall = (req, res) => {
     })
 }
 
-exports.getone = (req, res) => {
-    console.log("Processing func -> getone budgets")
-    
-
-    Budget.findByPk(req.params.id).then(budget => {
-        res.status(200).send(budget)
-    }).catch(err => {
-        res.status(500).send("Error -> " + err)
-    })
-}
-
 exports.create = (req, res) => {
     console.log("Processing func -> create budgets")
     
@@ -71,27 +60,6 @@ exports.create = (req, res) => {
         console.log(err)
         res.status(500).send("Error -> " + err)
     })
-}
-
-exports.update = (req, res) => {
-    console.log("Processing func -> update budgets")
-    
-
-    Budget.update({
-        name: req.body.name,
-        color: req.body.color,
-        owner_id: req.body.owner_id,
-        currency_id: req.body.currency_id
-    },
-        {
-            where: {
-                id: req.params.id
-            }
-        }).then(budget => {
-            res.status(200).send("Budget " + req.params.id + " updated successfully!")
-        }).catch(err => {
-            res.status(500).send("Error -> " + err)
-        })
 }
 
 exports.delete = (req, res) => {
