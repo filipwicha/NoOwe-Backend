@@ -14,3 +14,5 @@ const env = {
   }
    
   module.exports = env
+
+  //$2a$08$upNdUbXY/Gne9JKKQqslD.Eityez1gPFyc/j9/uUFekHpCcqiszlK <- password for test
