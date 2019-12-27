@@ -11,6 +11,7 @@ module.exports = function (app) {
   app.post('/auth/signup', [middleware.checkDuplicateUserNameOrEmail], userController.signup)
   app.post('/auth/signin', userController.signin) 
 
+  app.get('/budgets', [middleware.verifyToken], budgetController.getall)
   app.post('/budget', [middleware.verifyToken], budgetController.create)
   app.delete('/budget/:id', [middleware.verifyToken], budgetController.delete)
 
