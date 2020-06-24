@@ -3,6 +3,7 @@ const TimeStamp = db.timeStamp
 
 function response(relay, power_switch, dummy) {
     var response = {
+        "uuid": "Node1",
         "date": new Date(),
         "relay": relay,
         "power_switch": power_switch
