@@ -1,10 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
     const TimeStamp = sequelize.define('timestamp', {
-        uuid: {
+        id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             allowNull: false,
             autoIncrement: true,
+        },
+        uuid: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            defaultValue: "Node1"
         },
         date: {
             type: Sequelize.DATE,

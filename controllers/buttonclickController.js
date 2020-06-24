@@ -43,4 +43,3 @@ function sendEmail(to, subject, text) {
         }
     });
 }
-
