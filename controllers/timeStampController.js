@@ -10,7 +10,7 @@ function response(relay, power_switch, dummy) {
     }
 
     if (dummy == true) {
-        response.uuid = "0"
+        response.uuid = "Node1"
     }
 
     return response
@@ -22,14 +22,14 @@ exports.check = (req, res) => {
     console.log("Processing func -> check timeStamp")
 
     TimeStamp.findAll({
-        limit: 2,
+        limit: 1,
         order: [['date', 'DESC']]
     }).then(function (timeStamps) {
         if (timeStamps.length > 0) {
             var timeStamp = timeStamps[0]
 
             if (checked == false && timeStamp.power_switch == true) {
-                timeStamp.power_switch = tru
+                timeStamp.power_switch = true
                 checked = true
                 res.status(200).send(timeStamp)
             } else {
