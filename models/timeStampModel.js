@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
         uuid: {
             type: Sequelize.STRING,
             allowNull: false,
-            defaultValue: "Node1"
+            defaultValue: "Node1" 
         },
         date: {
             type: Sequelize.DATE,
