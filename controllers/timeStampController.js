@@ -1,5 +1,6 @@
 const db = require('../config/db.config')
 const TimeStamp = db.timeStamp
+const Sequelize = require('sequelize')
 
 function response(relay, power_switch, dummy) {
     var response = {
@@ -80,5 +81,21 @@ exports.change = (req, res) => {
         }
     }).catch(err => {
         res.status(200).send("Error -> " + err)
+    })
+}
+
+exports.getAll = (req, res) => {
+    console.log("Processing func -> getAll timeStamp")
+
+    var datefrom = new Date(req.query.datefrom)
+    var dateto = new Date(req.query.dateto)
+
+    TimeStamp.findAll({
+        where: { date: { [Sequelize.Op.between]: [datefrom, dateto] } },
+        order: [['date', 'ASC']]
+    }).then(function (timeStamps) {
+        res.status(200).send(timeStamps)
+    }).catch(err => {
+        res.status(500).send(err)
     })
 }
