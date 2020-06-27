@@ -83,19 +83,3 @@ exports.change = (req, res) => {
         res.status(200).send("Error -> " + err)
     })
 }
-
-exports.getAll = (req, res) => {
-    console.log("Processing func -> getAll timeStamp")
-
-    var datefrom = new Date(req.query.datefrom)
-    var dateto = new Date(req.query.dateto)
-
-    TimeStamp.findAll({
-        where: { date: { [Sequelize.Op.between]: [datefrom, dateto] } },
-        order: [['date', 'ASC']]
-    }).then(function (timeStamps) {
-        res.status(200).send(timeStamps)
-    }).catch(err => {
-        res.status(500).send(err)
-    })
-}

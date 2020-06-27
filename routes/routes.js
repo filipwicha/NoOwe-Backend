@@ -8,10 +8,8 @@ const demoController = require('../controllers/demoController')
 module.exports = function (app) {
   app.get('/status/check', timeStamp.check)
   app.get('/status/change', timeStamp.change)
-  app.get('/status/all', timeStamp.getAll)
 
   app.post('/button/click', buttonClick.click)
-  app.get('/button/check', buttonClick.check)
 
   app.get('/demo', demoController.demo)
 }
