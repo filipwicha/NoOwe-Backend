@@ -11,7 +11,7 @@ const env = {
     idle: 10000
   },
   secret: 'mammamiapizzeria',
-  mail: 'homeofficernoreply@gmail.com',
+  mail: 'donotreplyhomeofficer@gmail.com',
   mailpassword: 'HomeOfficer1!'
 }
 

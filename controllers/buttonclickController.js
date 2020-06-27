@@ -36,15 +36,15 @@ exports.click = (req, res) => {
                         addStyle()
 
             console.log(report)
-            res.status(200).send(report)
+            res.status(200).send("email sent")
+            sendEmail("filip.pietraszak@student.put.poznan.pl", "Remote working hours report in" + month, report)
+            sendEmail("5021567@gmail.com", "Remote working hours report in" + month, report)
         })
     } catch(err) {
         console.log(err)
+        res.status(500).send(err)
     }
     
-
-    console.log("email sent")
-    // sendEmail("filip.pietraszak@student.put.poznan.pl", "Test", "to jest testowy test ziioooom")
 }
 
 function addStyle(){
@@ -197,17 +197,16 @@ function getPreviousMonthRange() {
 
 function sendEmail(to, subject, text) {
 
-    var mail = 'homeofficer@onet.pl'
+    var mail = 'donotreplyhomeofficer@gmail.com'
 
-    let transporter = nodemailer.createTransport({
-        host: "smtp.poczta.onet.pl",
-        port: 465,
-        secure: true,
+    var transport = nodemailer.createTransport({
+        host: "smtp.mailtrap.io",
+        port: 2525,
         auth: {
-            user: mail, // generated ethereal user
-            pass: 'Homeofficer1', // generated ethereal password
-        },
-    });
+          user: "c140374df6fcfc",
+          pass: "62b6ddee4c14df"
+        }
+      });
 
     var mailOptions = {
         from: mail,
@@ -216,7 +215,7 @@ function sendEmail(to, subject, text) {
         text: text
     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
+    transport.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
         } else {
