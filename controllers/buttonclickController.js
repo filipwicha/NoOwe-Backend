@@ -1,6 +1,5 @@
 const db = require('../config/db.config')
 var nodemailer = require('nodemailer');
-var mail = require('../config/mail')
 
 const TimeStamp = db.timeStamp
 const Sequelize = require('sequelize');
@@ -8,10 +7,8 @@ const { timeStamp } = require('../config/db.config');
 
 const ButtonClick = db.buttonClick
 
-exports.click = (req, res) => {
-    console.log("Processing func -> getAll timeStamp")
-
-    var prevMonthRange = [new Date("2020-06-01T11:42:26.134Z"), new Date("2020-06-30T11:42:26.133Z")]// getPreviousMonthRange()
+exports.report = (req, res) => {
+    var prevMonthRange = [new Date("2020-06-01T11:42:26.134Z"), new Date("2020-06-30T11:42:26.133Z")]
     try{
         TimeStamp.findAll({
             where: { date: { [Sequelize.Op.between]: prevMonthRange } },
@@ -29,11 +26,48 @@ exports.click = (req, res) => {
             var month = getMonthName(durations[0].start)
             var total = formatSecondsAsTime(elapsedSeconds)
             var tableBody = [getHeader(), getRows(rows), addFooter(total)]
-            var report = sentence(month, total) +
+            var body = sentence(month, total) +
                         asTable(tableBody.join("")) +
                         "</br></br></br>" +
-                        "Created with love from HomeOfficer" +
+                        "Created with &#9829; by HomeOfficer team" +
                         addStyle()
+
+            var html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>HomeOfficer Report</title><meta name="description" content="HomeOfficer"><meta name="author" content="FwichaFpietraszak"></head><body>`+ middle(body) +`</body></html>`
+            
+            res.status(200).send(html)
+        })
+    } catch(err) {
+        console.log(err)
+        res.status(500).send(err)
+    }
+}
+exports.click = (req, res) => {
+    console.log("Processing func -> getAll timeStamp")
+
+    var prevMonthRange = getPreviousMonthRange() //[new Date("2020-06-01T11:42:26.134Z"), new Date("2020-06-30T11:42:26.133Z")]// getPreviousMonthRange()
+    try{
+        TimeStamp.findAll({
+            where: { date: { [Sequelize.Op.between]: prevMonthRange } },
+            order: [['id', 'ASC']]
+        }).then(function (timeStamps) {
+            var durations = getAllObjects(timeStamps) //[{"start": start, "stop": stop, "seconds": seconds}, ... ]
+            var rows = durations.map((duration) => {
+                return getRow(duration)
+            })
+
+            var elapsedSeconds = rows.map( row => {
+                return row.secondsElapsed
+            }).reduce((a, b) => a + b, 0)
+
+            var month = getMonthName(durations[0].start)
+            var total = formatSecondsAsTime(elapsedSeconds)
+            var tableBody = [getHeader(), getRows(rows), addFooter(total)]
+            var body = sentence(month, total) +
+                        asTable(tableBody.join("")) +
+                        "</br></br></br>" +
+                        "Created with &#9829; by HomeOfficer team" +
+                        addStyle()
+            var report = middle(body)
 
             console.log(report)
             res.status(200).send("email sent")
@@ -69,6 +103,16 @@ function addStyle(){
         padding: 10px;
         text-shadow: 1px 1px 1px #fff;
     }
+
+    h2 {
+        font: normal 20px Arial, sans-serif;
+    }
+
+    p {
+        font: normal 13px Arial, sans-serif;
+    }
+
+    
     </style>`
 }
 
@@ -102,6 +146,10 @@ function getMonthName(date){
   "July", "August", "September", "October", "November", "December"]
 
     return monthNames[date.getMonth()]
+}
+
+function middle(page){
+    return '<div>' + page + '</div>'
 }
 
 function getRow(object) {

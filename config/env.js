@@ -17,6 +17,3 @@ const env = {
 // https://mailtrap.io/inboxes/973092/messages/1753975040
 module.exports = env
 
-
-  //homeofficernoreply@gmail.com HomeOfficer1!
-  //$2a$08$upNdUbXY/Gne9JKKQqslD.Eityez1gPFyc/j9/uUFekHpCcqiszlK <- password for test

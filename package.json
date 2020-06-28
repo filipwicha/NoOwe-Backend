@@ -7,6 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
+  "build": "npm build",
+  "clean": "rm -rf node_modules", 
+  "reinstall": "npm run clean && npm install", 
+  "rebuild": "npm run clean && npm install && npm run build",
   "author": "Filip Wicha",
   "license": "ISC",
   "dependencies": {
