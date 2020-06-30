@@ -8,7 +8,7 @@ const { timeStamp } = require('../config/db.config');
 const ButtonClick = db.buttonClick
 
 exports.report = (req, res) => {
-    var prevMonthRange = [new Date("2020-06-01T11:42:26.134Z"), new Date("2020-06-30T11:42:26.133Z")]
+    var prevMonthRange = [new Date("2020-06-01T00:00:00.000Z"), new Date("2020-06-30T23:59:59.999Z")]
     try{
         TimeStamp.findAll({
             where: { date: { [Sequelize.Op.between]: prevMonthRange } },
