@@ -14,7 +14,10 @@ exports.report = (req, res) => {
             where: { date: { [Sequelize.Op.between]: prevMonthRange } },
             order: [['id', 'ASC']]
         }).then(function (timeStamps) {
-            var durations = getAllObjects(timeStamps) //[{"start": start, "stop": stop, "seconds": seconds}, ... ]
+            var durations = getAllObjects(timeStamps).filter(duration => {
+                return Object.keys(duration).length > 0
+            }) //[{"start": start, "stop": stop, "seconds": seconds}, ... ]
+            
             var rows = durations.map((duration) => {
                 return getRow(duration)
             })
@@ -153,6 +156,7 @@ function middle(page){
 }
 
 function getRow(object) {
+    console.log(object)
     var row = {
         "startDate": formatAsDate(object.start),
         "startTime": formatAsTime(object.start),
@@ -180,6 +184,7 @@ function add0(number){
 }
 
 function formatAsDate(date){
+    console.log(date)
     var dd = add0(date.getDate());
 
     var mm = add0(date.getMonth() + 1);
