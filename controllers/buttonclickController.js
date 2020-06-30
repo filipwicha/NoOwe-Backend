@@ -156,7 +156,6 @@ function middle(page){
 }
 
 function getRow(object) {
-    console.log(object)
     var row = {
         "startDate": formatAsDate(object.start),
         "startTime": formatAsTime(object.start),
@@ -184,7 +183,6 @@ function add0(number){
 }
 
 function formatAsDate(date){
-    console.log(date)
     var dd = add0(date.getDate());
 
     var mm = add0(date.getMonth() + 1);
