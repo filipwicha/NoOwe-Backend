@@ -27,4 +27,13 @@ module.exports = function (app) {
   app.get('/categories', [middleware.verifyToken], categoryController.getall)
   
   app.get('/demo', demoController.demo)
+
+  app.get('/demo/data', demoController.data)
+
+  app.get('/demo/percent', demoController.getpercent)
+  app.post('/demo/percent', demoController.setpercent)
 }
+
+
+   
+   
