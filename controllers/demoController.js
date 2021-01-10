@@ -56,17 +56,19 @@ function getRandomInt(min, max) {
 exports.data = (req, res) => {
     var json = {
         "main": {
-            "temp": getRandomArbitrary(-10,30),
+            "temp": getRandomArbitrary(-10, 30),
             "pressure": getRandomInt(980, 1200),
-            "humidity":getRandomArbitrary(0,100)
+            "humidity": getRandomArbitrary(0, 100)
         },
-            "wind":{
-                "speed" : getRandomArbitrary(0, 150),
-                "gust": getRandomArbitrary(0,150),
-                "deg" : getRandomInt(0,360)
-            },
-          "dt": new Date().valueOf()  
-        }
+        "wind": {
+            "speed": getRandomArbitrary(0, 150),
+            "gust": getRandomArbitrary(0, 150),
+            "deg": getRandomInt(0, 360)
+        },
+        "dt": new Date().valueOf()
+    }
+
+    console.log(json)
 
     res.status(200).send(json)
 }
@@ -74,11 +76,12 @@ exports.data = (req, res) => {
 var currentPercent = 69
 
 exports.getpercent = (req, res) => {
-    console.log
+    console.log("getpercent")
     res.status(200).send({value: currentPercent})
 }
 
 exports.setpercent = (req, res) => {
     currentPercent = req.body.percent
+    console.log("setpercent" + currentPercent)
     res.status(200).send("changed to " + currentPercent)
 } 
