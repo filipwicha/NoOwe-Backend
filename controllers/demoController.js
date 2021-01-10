@@ -81,7 +81,8 @@ exports.getpercent = (req, res) => {
 }
 
 exports.setpercent = (req, res) => {
-    currentPercent = req.body.percent
+    console.log(req.body)
+    currentPercent = req.body.value
     console.log("setpercent" + currentPercent)
     res.status(200).send("changed to " + currentPercent)
 } 
