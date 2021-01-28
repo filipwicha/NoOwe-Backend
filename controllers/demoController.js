@@ -56,14 +56,14 @@ function getRandomInt(min, max) {
 exports.data = (req, res) => {
     var json = {
         "main": {
-            "temp": getRandomArbitrary(-10, 30),
-            "pressure": getRandomInt(980, 1200),
-            "humidity": getRandomArbitrary(0, 100)
+            "temp": getRandomArbitrary(20, 21),
+            "pressure": getRandomInt(1002, 1002),
+            "humidity": getRandomArbitrary(54, 55)
         },
         "wind": {
-            "speed": getRandomArbitrary(0, 150),
-            "gust": getRandomArbitrary(0, 150),
-            "deg": getRandomInt(0, 360)
+            "speed": getRandomArbitrary(0, 0),
+            "gust": getRandomArbitrary(0, 0),
+            "deg": getRandomInt(0, 0)
         },
         "dt": new Date().valueOf()
     }
