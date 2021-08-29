@@ -7,10 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "build": "npm build",
-  "clean": "rm -rf node_modules", 
-  "reinstall": "npm run clean && npm install", 
-  "rebuild": "npm run clean && npm install && npm run build",
   "author": "Filip Wicha",
   "license": "ISC",
   "dependencies": {
@@ -23,7 +19,6 @@
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "mysql2": "^2.0.0",
-    "nodemailer": "^6.4.10",
     "nodemon": "^2.0.2",
     "passport-auth-token": "^1.0.1",
     "passport-jwt": "^4.0.0",
